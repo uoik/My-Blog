@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+	<link href="css/froala_editor.min.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        section {
+            width: 80%;
+            margin: auto;
+            text-align: left;
+        }
+
+        .header-title{
+            height: 50px;
+            line-height: 50px;
+            background: #191818;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+        }
+
+        .container{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input{
+           width: 48%;
+           box-sizing: border-box;
+           font-weight: bold;
+           border: none;
+           padding: 8px 15px;
+           outline: none;
+           border-radius: 10px;
+           box-shadow: 1px 1px 5px #888;
+        }
+
+        #btn{
+            width: 100%;
+            padding: 8px 15px;
+            background: #d6d7d8;
+            border: 1px solid #8a8a8a;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: #3a3a3a;
+            cursor: pointer;
+        }
+        #btn:hover{
+            background: #464646;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="header-title">文章编辑</p>
+    <section id="editor">
+        <div class="container">
+            <input type="text" id="title" placeholder="请输入文章标题">
+            <input type="text" id="tags" placeholder="请输入文章标签（逗号分隔）">
+        </div>
+        <div id='edit' style="margin-top: 30px;">
+
+        </div>
+        <button id="btn" onclick=submit()>提交</button>
+    </section>
+
+  <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+  <script src="js/froala_editor.min.js"></script>
+  <script src="js/plugins/tables.min.js"></script>
+  <script src="js/plugins/lists.min.js"></script>
+  <script src="js/plugins/colors.min.js"></script>
+  <script src="js/plugins/media_manager.min.js"></script>
+  <script src="js/plugins/font_family.min.js"></script>
+  <script src="js/plugins/font_size.min.js"></script>
+  <script src="js/plugins/block_styles.min.js"></script>
+  <script src="js/plugins/video.min.js"></script>
+
+  <script>
+      $(function(){
+          $('#edit').editable({inlineMode: false, alwaysBlank: true})
+      });
+
+      function submit() {
+          var title = $('#title').val();
+          var tags = $('#tags').val();
+          var editor = $('#edit .froala-element').html();
+          console.log(title, tags, editor)
+      }
+  </script>
+</body>
+</html>

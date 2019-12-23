@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/favicon.ico">
+    <title>ChenJianHui - 个人博客 | 关于</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 左侧标题列表 -->
+            <a href="/" class="title">ChenJianHui - 个人博客</a>
+            <ul class="menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/sitemap.html">地图</a></li>
+                <li><a href="/about.html">关于</a></li>
+                <li><a href="/guestbook.html">留言</a></li>
+            </ul>
+
+            <!-- 右侧搜索框 -->
+            <div class="search_bar" id="search_bar">
+                <input type="text" class="search_box" placeholder="输入关键字查找" id="search_box">
+                <button class="btn" @click='queryKeyBlog'>搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 内容 -->
+    <div class="content">
+        <!-- 内容左侧 -->
+        <div class="content-left">
+            <!-- 关于模块 -->
+            <div class="about">
+                <div class="about-item">
+                    <p class="about-title">About Me</p>
+                    <div class="about-content">
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                    </div>
+                </div>
+                <div class="about-item">
+                    <p class="about-title">About The Blog</p>
+                    <div class="about-content">
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                        <p>认为JavaScript是世界上最好的语言</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 留言模块 -->
+            <div class="message" id="message">
+                    <span>关于：目前有{{ total }} 条留言</span>
+                    <div class="message-content"  v-for='item in messageList'>
+                        <div>
+                            <img class="pic" src="./img/grenTou.jpg" alt="用户头像">
+                            <strong class="message-name">{{ item.user_name }}：</strong><strong v-show='isReply(item.parent)' class="message-name">@{{ item.parent_name }} </strong>发表于 <span class="message-time">{{ updateTime(item.ctime) }}</span> [<a href="#comments" @click='replyComments(item.id, item.user_name)'>回复</a>]
+                        </div>
+                        <p>{{ item.comments }}</p>
+                    </div>
+                    <!-- 分页功能 -->
+                    <el-pagination
+                        background
+                        layout="prev, pager, next"
+                        :total="total"
+                        :page-size='pageSize'
+                        @prev-click='prevClick'
+                        @next-click='nextClick'
+                        @current-change='currentChange'
+                    >
+                    </el-pagination>
+            </div>
+            <!-- 发表评论模块 -->
+            <div class="comments" id="comments">
+                <p>发表评论</p>
+                <form id="comments-form">
+                    <input class='p-left' type="text" placeholder="昵称" id="comments-name">
+                    <input class="p-right" type="text" placeholder="邮箱(评论回复时通知使用)" id="comments-email">
+                    <textarea placeholder="评论内容" id="comments-comments" rows="5" required></textarea>
+                    <p>
+                        <input class="p-code" type="text" placeholder="验证码" id="comments-code">
+                        <span @click='getSvgCaptcha' class="codeSvg" v-html='codeSvg'></span>
+                    </p>
+                    <input type="submit" class="btn send" @click='insertComments'>
+                    <input type="reset" class="btn reset">
+                </form>
+            </div>
+        </div>
+        <!-- 内容右侧 -->
+        <div class="content-right">
+                <!-- 随机标签云 -->
+                <div class="right-module">
+                    <div class="title">随机标签云</div>
+                    <div class="tags" id="tags">
+                        <a :href="tag.link" v-for='tag in tagsArr' :style="{fontSize: renderSize(), color: renderColor()}">{{ tag.tag }}</a>
+                    </div>
+                </div>
+                <!-- 最近热门 -->
+                <div class="right-module">
+                    <div class="title">最近热门</div>
+                    <ul class="hot-menu" id="hot-menu">
+                        <li v-for='item in menuList'>
+                            <a :href="item.link">{{ item.title }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 最新评论 -->
+                <div class="right-module">
+                        <div class="title">最新评论</div>
+                        <ul class="new-comments" id="new-comments">
+                            <li v-for='item in commentsList'>
+                                <p><span class="name">{{ item.user_name }}</span><span class="time">[ {{ updateTime(item.ctime) }} ]</span></p>
+                                <a :href="item.link">{{ item.comments }}</a>
+                            </li>
+                        </ul>
+                </div>
+                <!-- 友情链接 -->
+                <div class="right-module">
+                        <div class="title">友情链接</div>
+                        <ul class="friendship">
+                            <li>
+                                <span><a href="#">暂无</a></span>
+                                <span><a href="#">暂无</a></span>
+                            </li>
+                        </ul>
+                </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+        </div>
+        <p>Copyright © 2010-2019 <a href="/">ChenJianHui - 个人博客 </a>All rights reserved. 由免费开源的Vue框架开发.</p>
+    </footer>
+
+    <script src="./js/vue.min.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+    <script src="./js/axios.js"></script>
+    <script src="./js/base.js"></script>
+    <script src="./js/about.js"></script>
+</body>
+</html>

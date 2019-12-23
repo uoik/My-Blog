@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    padding: 0 30px;
+}
+
+a{
+    color: inherit;
+}
+
+.title{
+    font-weight: bold;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-size: 18px;
+    text-align: center;
+}
+
+.crumbs{
+    border: 1px solid #eee;
+    padding: 10px 8px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.article-list{
+    border: 1px solid #eee;
+    padding: 30px 8px;
+}
+
+.article-list li.item-title{
+    list-style: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.article-list li{
+    margin: 8px 0 8px 35px;
+    font-size: 13px;
+}
+
+.article-list li a:hover{
+    color: #337ab7;
+}

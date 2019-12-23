@@ -1,0 +1,68 @@
+/* 每日一句样式 */
+.every-day{
+    background: #f5f5f5;
+    padding: 20px;
+    text-align: left;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px #888;
+}
+
+.every-day .every-day-title{
+    color: orange;
+    font-size: 12px;
+}
+.every-day .every-day-title::after{
+    font-family: 'MyIcon';
+    content:'\e122';
+}
+
+.every-day .every-day-content{
+    margin-top: 10px;
+}
+
+.every-day p.name{
+    padding: 0;
+    text-align: right;
+}
+
+/* 文章列表部分 */
+.article-list{
+    margin: 20px 0;
+}
+
+.article-list .item{
+    padding-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    background: #f5f5f5;
+    box-shadow: 1px 1px 8px #888;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-list .item .title{
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.article-list .item .title:hover{
+    color: #337ab7;
+}
+
+.article-list .item .introduce{
+    padding: 0 20px;
+    margin: 8px 0;
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.article-list .item .release{
+    padding: 4px 20px;
+    margin-top: 15px;
+    background: #1f1f1f;
+    color: #fff;
+    font-size: 14px;
+}

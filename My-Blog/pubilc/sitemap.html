@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/favicon.ico">
+    <title>ChenJianHui - 个人博客 | 地图</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/sitemap.css">
+</head>
+<body>
+    <div class="title">ChenJianHui - 个人博客's SiteMap</div>
+    <div class="crumbs"><a href="/"><b>ChenJianHui - 个人博客</b></a> → <span>站点地图</span></div>
+    <div class="article-list">
+        <ul id="sitemapList">
+            <li class="item-title">最新文章</li>
+            <li v-for='item in mapList'><a :href="item.link">{{ item.title }}</a></li>
+        </ul>
+    </div>
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/axios.js"></script>
+    <script src="./js/sitemap.js"></script>
+</body>
+</html>

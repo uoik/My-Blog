@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/favicon.ico">
+    <title>ChenJianHui - 个人博客</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
+    
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container">
+            <!-- 左侧标题列表 -->
+            <a href="/" class="title">ChenJianHui - 个人博客</a>
+            <ul class="menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/sitemap.html">地图</a></li>
+                <li><a href="/about.html">关于</a></li>
+                <li><a href="/guestbook.html">留言</a></li>
+            </ul>
+
+            <!-- 右侧搜索框 -->
+            <div class="search_bar" id="search_bar">
+                <input type="text" class="search_box" placeholder="输入关键字查找" id="search_box">
+                <button class="btn" @click='queryKeyBlog'>搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 内容 -->
+    <div class="content">
+        <!-- 内容左侧 -->
+        <div class="content-left">
+            <!-- 每日一句 -->
+            <div class="every-day" id="every-day">
+                <span class="every-day-title">每日一句（20191218）</span>
+                <p class="every-day-content" v-html='getContent'></p>
+                <p class="name">———— {{ everyDay.name }}</p>
+            </div>
+            <!-- 文章内容 -->
+            <div class="article-list" id="article-list">
+                <div class="item" v-for='article in articleList'>
+                    <a :href="article.link" class="title">{{ article.title }}</a>
+                    <p class="introduce" v-html='article.content'></p>
+                    <p class="release">发布于 {{ updateTime(article.ctime) }} |  浏览({{ article.views }}) | Tags：{{ article.tags }}</p>
+                </div>
+                <!-- 分页功能 -->
+                <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="total"
+                    :page-size='pageSize'
+                    @prev-click='prevClick'
+                    @next-click='nextClick'
+                    @current-change='currentChange'
+                >
+                </el-pagination>
+            </div>
+        </div>
+        <!-- 内容右侧 -->
+        <div class="content-right">
+                <!-- 随机标签云 -->
+                <div class="right-module">
+                    <div class="title">随机标签云</div>
+                    <div class="tags" id="tags">
+                        <a :href="tag.link" v-for='tag in tagsArr' :style="{fontSize: renderSize(), color: renderColor()}">{{ tag.tag }}</a>
+                    </div>
+                </div>
+                <!-- 最近热门 -->
+                <div class="right-module">
+                    <div class="title">最近热门</div>
+                    <ul class="hot-menu" id="hot-menu">
+                        <li v-for='item in menuList'>
+                            <a :href="item.link">{{ item.title }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 最新评论 -->
+                <div class="right-module">
+                        <div class="title">最新评论</div>
+                        <ul class="new-comments" id="new-comments">
+                            <li v-for='item in commentsList'>
+                                <p><span class="name">{{ item.user_name }}</span><span class="time">[ {{ updateTime(item.ctime) }} ]</span></p>
+                                <a :href="item.link">{{ item.comments }}</a>
+                            </li>
+                        </ul>
+                </div>
+                <!-- 友情链接 -->
+                <div class="right-module">
+                        <div class="title">友情链接</div>
+                        <ul class="friendship">
+                            <li>
+                                <span><a href="#">暂无</a></span>
+                                <span><a href="#">暂无</a></span>
+                            </li>
+                        </ul>
+                </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+            <span><a href="/">JavaScript</a></span>
+        </div>
+        <p>Copyright © 2010-2019 <a href="/">ChenJianHui - 个人博客 </a>All rights reserved. 由免费开源的Vue框架开发.</p>
+    </footer>
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/axios.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.0/lib/index.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/base.js"></script>
+</body>
+</html>

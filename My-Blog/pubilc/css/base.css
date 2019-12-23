@@ -1,0 +1,221 @@
+/* 复用样式 */
+*{
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+ul li{
+    list-style: none;
+}
+
+body{
+    background-image: url('../img/bg.jpg');
+    position: relative;
+    text-align: center;
+}
+
+@font-face{
+    font-family: 'MyIcon';
+    src: url('../font/glyphicons-halflings-regular.woff2');
+}
+
+/* 头部样式 */
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #191818;
+    height: 50px;
+    z-index: 999;
+}
+
+.container{
+    position: relative;
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.container .title{
+    float: left;
+    color: #eee;
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.container .menu{
+    margin-left: 10px;
+    line-height: 50px;
+    height: 100%;
+    color: white;
+    float: left;
+    display: flex;
+}
+
+.container .menu > li{
+    padding: 0 15px;
+    font-size: 14px;
+}
+.container .menu > li > a:hover{
+    color: #777;
+}
+
+.search_bar{
+    position: absolute;
+    right: 0;
+    height: 50px;
+}
+
+.search_bar .search_box{
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 10px;
+    outline: none;
+    padding: 8px 10px;
+    border: none;
+}
+
+.search_bar .btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 8px;
+    width: 54px;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    background: #eee;
+}
+.search_bar .btn:hover{
+    background: #ccc;
+}
+
+/* 内容复用样式 */
+.content{
+    width: 1170px;
+    margin: 80px auto 0;
+    overflow: hidden;
+}
+
+.content-left{
+    padding-right: 30px;
+    float: left;
+    width: 66%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.content-right{
+    float: right;
+    width: 34%;
+}
+
+.right-module{
+    background: #1f1f1f;;
+    text-align: left;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.right-module .title{
+    background: #191818;
+    padding: 10px 15px;
+    color: orange;
+}
+
+/* 随机标签云 */
+.right-module .tags{
+    padding: 15px;
+    word-break: break-all;
+}
+
+.right-module .tags > a{
+    color: #fff;
+    font-size: 14px;
+    margin-right: 2px;
+}
+
+/* 最近热门 */
+.right-module .hot-menu > li{
+    padding: 8px 15px;
+    border-bottom: 1px solid #292929;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* 最新评论 */
+.right-module .new-comments{
+    margin-bottom: 2px;
+}
+
+.right-module .new-comments > li{
+    border-bottom: 1px solid #292929;
+    font-size: 14px;
+    color: #fff;
+    padding: 4px 15px;
+}
+
+.right-module .new-comments > li > p{
+    margin-bottom: 2px;
+}
+
+.right-module .new-comments > li .time{
+    float: right;
+}
+
+.right-module .new-comments > li > a{
+    color: #777;
+}
+
+/* 友情链接 */
+.right-module .friendship > li{
+    padding: 8px 15px;
+    border-bottom: 1px solid #292929;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+}
+
+.right-module .friendship > li > span{
+    width: 50%;
+    display: inline-block;
+}
+
+.right-module .hot-menu > li > a:hover,
+.right-module .new-comments > li > a:hover,
+.right-module .friendship > li a:hover{
+    color: #337ab7;
+}
+
+/* 底部样式 */
+.footer{
+    width: 100%;
+    background: #191818;
+    color: #a2a2a2;
+    font-size: 14px;
+}
+
+.footer > div{
+    padding: 10px 30px;
+}
+
+.footer > div > span{
+    margin: 0 2px;
+}
+
+.footer > p{
+    padding-bottom: 10px;
+}
+
+.footer a:hover{
+    color: #337ab7;
+}
