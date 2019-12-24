@@ -38,7 +38,7 @@
         <div class="content-left">
             <!-- 每日一句 -->
             <div class="every-day" id="every-day">
-                <span class="every-day-title">每日一句（20191218）</span>
+                <span class="every-day-title">每日一句（ {{ queryTime }} ）</span>
                 <p class="every-day-content" v-html='getContent'></p>
                 <p class="name">———— {{ everyDay.name }}</p>
             </div>
@@ -85,7 +85,7 @@
                         <div class="title">最新评论</div>
                         <ul class="new-comments" id="new-comments">
                             <li v-for='item in commentsList'>
-                                <p><span class="name">{{ item.user_name }}</span><span class="time">[ {{ updateTime(item.ctime) }} ]</span></p>
+                                <p><span class="name">{{ item.user_name }}</span><span class="time">{{ updateTime(item.ctime) }}</span></p>
                                 <a :href="item.link">{{ item.comments }}</a>
                             </li>
                         </ul>

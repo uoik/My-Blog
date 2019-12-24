@@ -80,36 +80,7 @@ var renderHotMenu = new Vue({
 var renderComments = new Vue({
     el: '#new-comments',
     data: {
-        commentsList: [
-            {
-                id: 1,
-                name: '唐舞麟',
-                ctime: '2019-12-19 15:41',
-                content: '你的留言板是真的酷炫',
-                link: '/blog_detail.html'
-            },
-            {
-                id: 2,
-                name: '古月娜',
-                ctime: '2019-12-19 15:41',
-                content: '你的留言板是真的酷炫',
-                link: '/blog_detail.html'
-            },
-            {
-                id: 3,
-                name: '唐三',
-                ctime: '2019-12-19 15:41',
-                content: '你的留言板是真的酷炫',
-                link: '/blog_detail.html'
-            },
-            {
-                id: 4,
-                name: '小舞',
-                ctime: '2019-12-19 15:41',
-                content: '你的留言板是真的酷炫',
-                link: '/blog_detail.html'
-            }
-        ]
+        commentsList: []
     },
     computed: {
         queryNewComments: () => {
@@ -127,7 +98,17 @@ var renderComments = new Vue({
         // 修改时间格式
         updateTime: () => {
             return (time) => {
-                return new Date(time * 1000).toLocaleString().replace(/\//g, '-');
+                var date = new Date(time * 1000);
+                var F = date.getFullYear();
+                var Month = date.getMonth() + 1;
+                var D = date.getDate();
+                var H = date.getHours();
+                var Minutes = date.getMinutes();
+                Month = Month >= 10 ? Month : '0' + Month;
+                D = D >= 10 ? D : '0' + D;
+                H = H >= 10 ? H : '0' + H;
+                Minutes = Minutes >= 10 ? Minutes : '0' + Minutes;
+                return F + '年' + Month + '月' + D + '日' + ' ' + H + ":" + Minutes;
             }
         },
     },

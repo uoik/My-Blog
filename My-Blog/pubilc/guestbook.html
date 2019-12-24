@@ -47,7 +47,7 @@
                     <span>关于：目前有{{ total }} 条留言</span>
                     <div class="message-content"  v-for='item in messageList'>
                         <div>
-                            <img class="pic" src="./img/grenTou.jpg" alt="用户头像">
+                            <img class="pic" :src="item.parent > 0 ? './img/reply.jpg' : './img/comments.jpg'" alt="用户头像">
                             <strong class="message-name">{{ item.user_name }}：</strong><strong v-show='isReply(item.parent)' class="message-name">@{{ item.parent_name }} </strong>发表于 <span class="message-time">{{ updateTime(item.ctime) }}</span> [<a href="#comments" @click='replyComments(item.id, item.user_name)'>回复</a>]
                         </div>
                         <p>{{ item.comments }}</p>
@@ -103,7 +103,7 @@
                         <div class="title">最新评论</div>
                         <ul class="new-comments" id="new-comments">
                             <li v-for='item in commentsList'>
-                                <p><span class="name">{{ item.user_name }}</span><span class="time">[ {{ updateTime(item.ctime) }} ]</span></p>
+                                <p><span class="name">{{ item.user_name }}</span><span class="time">{{ updateTime(item.ctime) }}</span></p>
                                 <a :href="item.link">{{ item.comments }}</a>
                             </li>
                         </ul>

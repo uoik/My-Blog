@@ -10,6 +10,9 @@ var everyDay = new Vue({
     computed: {
         getContent: function () {
             return this.everyDay.content
+        },
+        queryTime: () => {
+            return new Date(Date.now()).toLocaleDateString().replace(/\//g, '');
         }
     },
     created: function () {
