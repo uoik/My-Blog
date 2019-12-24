@@ -1,5 +1,6 @@
 var express = require('express');
 
+var globalConfig = require('./config')
 var loader = require('./loader');
 var app = express();
 
@@ -36,7 +37,6 @@ app.get('/queryNewComments', loader.paths.get('/queryNewComments'));
 
 // 查询标签数据
 app.get('/queryAllTags', loader.paths.get('/queryAllTags'));
-
-app.listen(12306, () => {
+app.listen(globalConfig.port, () => {
     console.log('服务器已启动');
 });
