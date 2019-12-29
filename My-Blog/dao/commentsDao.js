@@ -3,7 +3,7 @@ var timeUtil = require('../util/timeUtil');
 
 /**
  * 插入评论数据
- * @param {*} tag 标签
+ * @param {*} paramObj 参数对象
  * @param {*} blogId 
  */
 function insertComments(paramObj, success) {

@@ -52,6 +52,7 @@ var articleList = new Vue({
                     // 按页请求文章数据
                     axios.get('/queryBlog?page=' + page + '&pageSize=' + pageSize)
                     .then(function (response) {
+                        console.log(response)
                         // 处理数据
                         var total = response.data.data[0].total; // 总数据量
                         var articleArr = response.data.data[1]; // 文章列表数据
