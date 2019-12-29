@@ -33,6 +33,7 @@ body{
     background-color: #191818;
     height: 50px;
     z-index: 999;
+    min-width: 1200px;
 }
 
 .container{
@@ -103,6 +104,8 @@ body{
     width: 1170px;
     margin: 80px auto 0;
     overflow: hidden;
+    margin-bottom: 70px;
+    min-width: 1200px;
 }
 
 .content-left{
@@ -204,6 +207,7 @@ body{
     background: #191818;
     color: #a2a2a2;
     font-size: 14px;
+    min-width: 975px;
 }
 
 .footer > div{

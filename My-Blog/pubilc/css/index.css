@@ -57,6 +57,7 @@
     word-wrap: break-word;
     word-break: break-all;
     overflow: hidden;
+    max-height: 99px;
 }
 
 .article-list .item .release{

@@ -27,7 +27,7 @@ function insertBlog(paramObj = {}, success) {
  */
 function queryBlog(page = 1, pageSize = 5, success) {
     var connect = dbutil.createConnection();
-    var insertSql = "select * from blog limit ?, ?;"
+    var insertSql = "select * from blog order by ctime desc limit ?, ?;"
     var params = [(page - 1) * pageSize, +pageSize];
     connect.connect();
     connect.query(insertSql, params, (error, result) => {
@@ -64,7 +64,7 @@ function queryBlogTotal(success) {
  */
 function queryBlogByTag(tag, page = 1, pageSize = 10, success) {
     var connect = dbutil.createConnection();
-    var insertSql = "select * from blog where tags like ? limit ?, ?;"
+    var insertSql = "select * from blog where tags like ? order by ctime desc limit ?, ?;"
     var params = ['%'+ tag +'%', (page - 1) * pageSize, +pageSize];
     connect.connect();
     connect.query(insertSql, params, (error, result) => {
@@ -100,7 +100,7 @@ function queryBlogByTagTotal(tag, success) {
  */
 function queryBlogByValue(value, page, pageSize, success) {
     var connect = dbutil.createConnection();
-    var insertSql = "select * from blog where tags like ? or title like ? limit ?, ?;"
+    var insertSql = "select * from blog where tags like ? or title like ? order by ctime desc limit ?, ?;"
     var params = ['%'+ value +'%', '%'+ value +'%', (page - 1) * pageSize, +pageSize];
     connect.connect();
     connect.query(insertSql, params, (error, result) => {

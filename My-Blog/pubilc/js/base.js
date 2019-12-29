@@ -83,6 +83,7 @@ var renderComments = new Vue({
         commentsList: []
     },
     computed: {
+        // 请求最新评论
         queryNewComments: () => {
             return () => {
                 axios.get('/queryNewComments')

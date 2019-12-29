@@ -75,7 +75,7 @@ var detailMessage = new Vue({
                 return new Date(time * 1000).toLocaleDateString().replace(/\//g, '-');
             }
         },
-        // 点击回复设置评论parent、parentName值
+        // 点击回复设置detailComments.parent、parentName值
         replyComments: () => {
             return (id, name) => {
                 detailComments.parent = id;
@@ -172,8 +172,11 @@ var detailComments = new Vue({
                     .then(function (result) {
                         alert('提交成功')
                         document.getElementById('comments-form').reset(); // 清空文本框
-                        detailMessage.queryComments(); // 重新获取数据
+                        detailComments.parent = -1; // 将父级值和名称重置
+                        detailComments.parentName = '0'; // 将父级值和名称重置
+                        detailMessage.queryComments(); // 重新获取留言数据
                         detailComments.getSvgCaptcha(); // 重新请求验证码
+                        renderComments.queryNewComments(); // 重新拉取最新评论
                     })
                     .catch(function (error) {
                         throw new Error(error)
