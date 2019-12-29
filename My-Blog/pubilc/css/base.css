@@ -198,6 +198,8 @@ body{
 
 /* 底部样式 */
 .footer{
+    position: fixed;
+    bottom: 0;
     width: 100%;
     background: #191818;
     color: #a2a2a2;
