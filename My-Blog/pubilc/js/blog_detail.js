@@ -172,7 +172,8 @@ var detailComments = new Vue({
                     .then(function (result) {
                         alert('提交成功')
                         document.getElementById('comments-form').reset(); // 清空文本框
-                        detailMessage.queryBlogById(); // 重新获取数据
+                        detailMessage.queryComments(); // 重新获取数据
+                        detailComments.getSvgCaptcha(); // 重新请求验证码
                     })
                     .catch(function (error) {
                         throw new Error(error)

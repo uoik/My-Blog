@@ -2,11 +2,11 @@ var mysql = require('mysql')
 
 module.exports.createConnection = () => {
     var connection = mysql.createConnection({
-        port: 3306,
-        host: '192.172.1.102',
+        port: 62687,
+        host: 'cd-cdb-b6i1yjbe.sql.tencentcdb.com',
         user: 'root',
-        password: 'hui123',
-        database: 'My-Blog'
+        password: 'myblog123',
+        database: 'my_blog'
     });
     return connection;
 }
