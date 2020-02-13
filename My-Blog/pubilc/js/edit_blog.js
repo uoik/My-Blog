@@ -19,10 +19,13 @@ function submit() {
       url: '/insertBlog',
       data: dataObj,
       success(result) {
-        alert('提交成功')
+        alert('提交成功');
         $('#title').val('');
         $('#tags').val('');
         $('#edit .froala-element').text('');
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 500)
       },
       error(error){
           throw new Error(error);

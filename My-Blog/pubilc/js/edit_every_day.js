@@ -21,6 +21,9 @@ function submit() {
             // 清空文本内容
             $('#from').val('');
             $('#edit .froala-element').html('');
+            setTimeout(() => {
+                window.location.href = '/'
+              }, 500)
         },
         error(error) {
         throw new Error(error);
