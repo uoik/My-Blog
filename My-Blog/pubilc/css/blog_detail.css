@@ -12,6 +12,7 @@
 .detail-head{
     padding-bottom: 20px;
     border-bottom: 1px solid #b9b9b9;
+    margin-bottom: 20px;
 }
 
 .location > a{
@@ -38,7 +39,11 @@
 
 /* 细节内容样式 */
 .detail-footer{
-    padding: 20px 20px 0;
+    padding: 0 10px;
+}
+
+.detail-footer p{
+    margin: 8px 0;
 }
 
 /* 留言模块样式 */

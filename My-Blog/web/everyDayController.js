@@ -6,7 +6,7 @@ var respUtil = require('../util/respUtil');
 function insertEveryDay (req, res) {
     req.on('data', (data) => {
         var params = JSON.parse(data.toString());
-        everyDayDao.insertEveryDay(params.content, params.from, (result) => {
+        everyDayDao.insertEveryDay(params.content, params.name, (result) => {
             res.writeHead(200);
             res.write(respUtil('success', '添加成功', null));
             res.end();

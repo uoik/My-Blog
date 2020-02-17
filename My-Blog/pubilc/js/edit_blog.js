@@ -1,33 +1,54 @@
-$(function(){
-    $('#edit').editable({language: 'zh_cn', inlineMode: false, alwaysBlank: true})
+// 初始化富文本
+var editor = new Simditor({
+  textarea: $('#editor'),
+  placeholder: '请输入文章内容',
+  toolbar: [
+      'title',
+      'bold',
+      'italic',
+      'underline',
+      'strikethrough',
+      'fontScale',
+      'color',
+      'ol',
+      'blockquote',
+      'code',
+      'table',
+      'link',
+      'hr',
+      'indent',
+      'outdent',
+      'alignment'
+  ]
 });
 
+// 提交上传数据
 function submit() {
-  var title = $('#title').val();
-  var tags = $('#tags').val();
-  var content = $('#edit .froala-element').html(); // 富文本结构
-  var contentText = $('#edit .froala-element').text(); // 富文本文字内容
+  var title = $('#title').val(); // 获取标题
+  var tags = $('#tags').val(); // 获取标签
+  var content = editor.getValue(); // 获取正文内容
 
-  if(!title) return alert('文章标题不可为空');
-  if(!tags) return alert('文章标签不可为空');
-  if(!contentText) return alert('文章内容不可为空');
+  // 判断文章是否填写完整
+  if (!title || !tags || !content) {
+      alert('内容填写不完整,请检查!');
+  }
 
-  var dataObj = JSON.stringify({title, tags, content});
+  var data = JSON.stringify({
+      title,
+      tags,
+      content
+  }); // 转换JSON格式
 
+  // 发送网络请求
   $.ajax({
       type: 'post',
       url: '/insertBlog',
-      data: dataObj,
+      data,
       success(result) {
-        alert('提交成功');
-        $('#title').val('');
-        $('#tags').val('');
-        $('#edit .froala-element').text('');
-        setTimeout(() => {
-          window.location.href = '/'
-        }, 500)
+          // 提交成功后跳转到首页
+          location.href = '/';
       },
-      error(error){
+      error(error) {
           throw new Error(error);
       }
   })

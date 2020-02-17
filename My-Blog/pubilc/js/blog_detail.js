@@ -2,10 +2,10 @@
 var blogDetail = new Vue({
     el: '#blog-detail',
     data: {
-        title: '测试标题',
-        ctime: '2019-12-21 23:28',
-        views: 520,
-        content: '<p><strong>测试文章内容</strong></p>'
+        title: '',
+        ctime: '',
+        views: 0,
+        content: ''
     },
     computed: {
         // 根据ID请求对应文章
@@ -21,6 +21,7 @@ var blogDetail = new Vue({
                 axios.get('/queryBlogById?blog_id=' + paramObj['blog_id'])
                     .then(function (result) {
                         var data = result.data.data[0];
+                        console.log(data);
                         blogDetail.title = data.title;
                         blogDetail.ctime = new Date(data.ctime * 1000).toLocaleString().replace(/\//g, '-');
                         blogDetail.views = data.views;

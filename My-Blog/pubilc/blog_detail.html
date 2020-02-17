@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/blog_detail.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.0/lib/theme-chalk/index.css">
-    
+    <link rel="stylesheet" href="./css/edit_style.css">
 </head>
 <body>
     <!-- 头部 -->
@@ -45,7 +45,8 @@
                     <p class="detail-ctime">发布时间：{{ ctime }}<span class="detail-views">浏览次数：{{ views }}</span></p>
                 </div>
                 <!-- 细节内容 -->
-                <div class="detail-footer" v-html='content'></div>
+                <div class="detail-footer" v-html='content'>
+                </div>
             </div>
             <!-- 留言模块 -->
             <div class="message" id="message">

@@ -50,7 +50,7 @@ body{
 }
 
 .container .menu{
-    margin-left: 10px;
+    margin:0 0 0 10px;
     line-height: 50px;
     height: 100%;
     color: white;
@@ -133,6 +133,10 @@ body{
     background: #191818;
     padding: 10px 15px;
     color: orange;
+}
+
+.right-module ul{
+    margin: 0;
 }
 
 /* 随机标签云 */

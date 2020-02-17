@@ -1,3 +1,17 @@
+// 主区域
+var about = new Vue({
+    el: '#about',
+    computed: {
+        // 获得年龄
+        getAge: () => {
+            return (year) => {
+                console.log(year)
+                return new Date().getFullYear() - year;
+            }
+        }
+    }
+})
+
 // 留言模块
 var detailMessage = new Vue({
     el: '#message',
@@ -98,25 +112,25 @@ var detailComments = new Vue({
             return (e) => {
                 e.preventDefault(); // 阻止默认事件
                 var codeText = document.getElementById('comments-code').value; // 得到验证码
-                if(codeText.toLowerCase() != detailComments.code.toLowerCase()) {
+                if (codeText.toLowerCase() != detailComments.code.toLowerCase()) {
                     alert('验证码不正确');
-                    return 
+                    return
                 };
 
                 var name = document.getElementById('comments-name').value;
                 var email = document.getElementById('comments-email').value;
                 var comments = document.getElementById('comments-comments').value;
-                if(!name || !email) return alert('name or email is null');
+                if (!name || !email) return alert('name or email is null');
 
                 // 发送请求
                 axios.post('/insertComments', {
-                    name,
-                    email,
-                    comments,
-                    parent: detailComments.parent,
-                    parentName: detailComments.parentName,
-                    blogId: -10
-                })
+                        name,
+                        email,
+                        comments,
+                        parent: detailComments.parent,
+                        parentName: detailComments.parentName,
+                        blogId: -10
+                    })
                     .then(function (result) {
                         alert('提交成功')
                         document.getElementById('comments-form').reset(); // 清空文本框

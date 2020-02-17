@@ -4,8 +4,8 @@ module.exports.createConnection = () => {
     var connection = mysql.createConnection({
         port: "3306",
         host: 'localhost',
-        user: 'my-blog',
-        password: 'EAwrJXWmFmmYbCF5',
+        user: 'root',
+        password: 'hui123',
         database: 'my-blog'
     });
     return connection;
