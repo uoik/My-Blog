@@ -67,3 +67,9 @@
     color: #fff;
     font-size: 14px;
 }
+
+/* ul、ol样式 */
+ul,
+ol {
+  margin: 0 0 0 30px;
+}

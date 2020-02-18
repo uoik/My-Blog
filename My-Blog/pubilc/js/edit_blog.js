@@ -19,7 +19,8 @@ var editor = new Simditor({
       'indent',
       'outdent',
       'alignment'
-  ]
+  ],
+  cleanPaste: false
 });
 
 // 提交上传数据

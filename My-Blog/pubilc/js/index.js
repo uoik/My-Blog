@@ -44,55 +44,57 @@ var articleList = new Vue({
                 var params = location.search.substr(1).split('&');
                 var paramObj = {};
                 for (const param of params) {
-                    if(param == '') continue;
+                    if (param == '') continue;
                     paramObj[param.split('=')[0]] = decodeURIComponent(param.split('=')[1]);
                 }
-                
-                if(!paramObj['tag'] && !paramObj['value']){ // 如果tag为false,查询全部文章
+
+                if (!paramObj['tag'] && !paramObj['value']) { // 如果tag为false,查询全部文章
                     // 按页请求文章数据
                     axios.get('/queryBlog?page=' + page + '&pageSize=' + pageSize)
-                    .then(function (response) {
-                        // 处理数据
-                        var total = response.data.data[0].total; // 总数据量
-                        var articleArr = response.data.data[1]; // 文章列表数据
-                        var res = articleArr.map(i => i = {...i, link: '/blog_detail.html?blog_id=' + i.id});
-                        // 重新赋值
-                        articleList.articleList = res;
-                        articleList.total = total;
-                    })
-                    .catch(function (error) {
-                        throw new Error(error)
-                    });
-                } else if(paramObj['tag']) { // 如果tag为true, 查询对应tag文章
+                        .then(function (result) {
+                            manageData(result); // 处理返回数据
+                        })
+                        .catch(function (error) {
+                            throw new Error(error)
+                        });
+                } else if (paramObj['tag']) { // 如果tag为true, 查询对应tag文章
                     axios.get('/queryBlogByTag?tag=' + paramObj['tag'] + '&page=' + page + '&pageSize=' + pageSize)
                         .then((result) => {
-                            // 处理数据
-                            var total = result.data.data[0].total; // 总数据量
-                            var articleArr = result.data.data[1]; // 文章列表数据
-                            var res = articleArr.map(i => i = {...i, link: '/blog_detail.html?blog_id=' + i.id});
-                            // 重新赋值
-                            articleList.articleList = res;
-                            articleList.total = total;
+                            manageData(result); // 处理返回数据
                         })
                         .catch((error) => {
                             throw new Error(error);
                         })
-                } else if(paramObj['value']) {
+                } else if (paramObj['value']) {
                     axios.get('/queryBlogByValue?value=' + paramObj['value'] + '&page=' + page + '&pageSize=' + pageSize)
                         .then((result) => {
-                            // 处理数据
-                            var total = result.data.data[0].total; // 总数据量
-                            var articleArr = result.data.data[1]; // 文章列表数据
-                            var res = articleArr.map(i => i = {...i, link: '/blog_detail.html?blog_id=' + i.id});
-                            // 重新赋值
-                            articleList.articleList = res;
-                            articleList.total = total;
+                            manageData(result); // 处理返回数据
                         })
                         .catch((error) => {
                             throw new Error(error);
                         })
                 }
-                
+            }
+            // 辅助函数：处理返回数据
+            function manageData(result) {
+                var total = result.data.data[0].total; // 总数据量
+                var articleArr = result.data.data[1]; // 文章列表数据
+                var newRes = articleArr.map(i => i = {
+                    ...i,
+                    link: '/blog_detail.html?blog_id=' + i.id
+                });
+
+                // 首页不显示代码片段
+                newRes = newRes.map(i => i = {
+                    ...i,
+                    content: i.content.replace(/<pre([\s\S]*)<\/pre>/, '')
+                })
+
+                console.log(newRes);
+
+                // 重新赋值
+                articleList.articleList = newRes;
+                articleList.total = total;
             }
         },
         // 修改时间格式

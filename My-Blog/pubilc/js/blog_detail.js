@@ -14,17 +14,17 @@ var blogDetail = new Vue({
                 var params = location.search.substr(1).split('&'); // 获取地址栏参数
                 var paramObj = {};
                 for (const param of params) {
-                    if(param == '') continue;
+                    if (param == '') continue;
                     paramObj[param.split('=')[0]] = param.split('=')[1];
                 }
-                if(!paramObj['blog_id']) throw new Error('文章ID获取错误'); // 判断是否有blog_id属性
+                if (!paramObj['blog_id']) throw new Error('文章ID获取错误'); // 判断是否有blog_id属性
                 axios.get('/queryBlogById?blog_id=' + paramObj['blog_id'])
                     .then(function (result) {
                         var data = result.data.data[0];
-                        console.log(data);
                         blogDetail.title = data.title;
                         blogDetail.ctime = new Date(data.ctime * 1000).toLocaleString().replace(/\//g, '-');
                         blogDetail.views = data.views;
+                        // 代码片段添加对应类名
                         blogDetail.content = data.content;
                     })
                     .catch(function (error) {
@@ -32,6 +32,30 @@ var blogDetail = new Vue({
                     })
             }
         }
+    },
+    updated() {
+        // Vue更新完成后执行DOM操作，判断是否有代码片段
+        function code() {
+            var $codepre = $("pre");
+            if ($codepre.length > 0) {
+                // 有代码片段给对应标签添加类名
+                for (var i = 0; i < $codepre.length; i++) {
+                    var item = $codepre.eq(i);
+                    var language = "css";
+                    var codehtml = item.html();
+                    var code = $("<code>");
+                    item.addClass('line-numbers');
+                    code.attr("class", "language-" + language);
+                    code.html(codehtml);
+                    item.html(code);
+                }
+            }
+            // 插入第三方插件高亮代码片段
+            var script = document.createElement('script');
+            script.src = './js/prism.js';
+            document.body.appendChild(script);
+        }
+        code();
     },
     created() {
         this.queryBlogById(); // 根据文章ID请求对应数据
@@ -55,10 +79,10 @@ var detailMessage = new Vue({
                 var params = location.search.substr(1).split('&'); // 获取地址栏参数
                 var paramObj = {};
                 for (const param of params) {
-                    if(param == '') continue;
+                    if (param == '') continue;
                     paramObj[param.split('=')[0]] = param.split('=')[1];
                 }
-                if(!paramObj['blog_id']) throw new Error('文章ID获取错误'); // 判断是否有blog_id属性
+                if (!paramObj['blog_id']) throw new Error('文章ID获取错误'); // 判断是否有blog_id属性
                 axios.get('/queryComments?blog_id=' + paramObj['blog_id'] + '&page=' + page + '&pageSize=' + pageSize)
                     .then(function (result) {
                         var data = result.data.data;
@@ -145,31 +169,31 @@ var detailComments = new Vue({
             return (e) => {
                 e.preventDefault(); // 阻止默认事件
                 var codeText = document.getElementById('comments-code').value; // 得到验证码
-                if(codeText.toLowerCase() != detailComments.code.toLowerCase()) {
+                if (codeText.toLowerCase() != detailComments.code.toLowerCase()) {
                     alert('验证码不正确');
-                    return 
+                    return
                 };
                 var params = location.search.substr(1).split('&');
                 var paramObj = {};
                 for (const param of params) {
                     paramObj[param.split('=')[0]] = param.split('=')[1];
                 }
-                if(!paramObj['blog_id']) throw new Error('文章ID获取错误');
+                if (!paramObj['blog_id']) throw new Error('文章ID获取错误');
 
                 var name = document.getElementById('comments-name').value;
                 var email = document.getElementById('comments-email').value;
                 var comments = document.getElementById('comments-comments').value;
-                if(!name || !email) return alert('name or email is null');
+                if (!name || !email) return alert('name or email is null');
 
                 // 发送请求
                 axios.post('/insertComments', {
-                    name,
-                    email,
-                    comments,
-                    parent: detailComments.parent,
-                    parentName: detailComments.parentName,
-                    blogId: paramObj['blog_id']
-                })
+                        name,
+                        email,
+                        comments,
+                        parent: detailComments.parent,
+                        parentName: detailComments.parentName,
+                        blogId: paramObj['blog_id']
+                    })
                     .then(function (result) {
                         alert('提交成功')
                         document.getElementById('comments-form').reset(); // 清空文本框
@@ -189,5 +213,3 @@ var detailComments = new Vue({
         this.getSvgCaptcha(); // 请求验证码
     }
 })
-
-
